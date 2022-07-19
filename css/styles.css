@@ -49,6 +49,7 @@ body {
   color: inherit;
   text-decoration: none;
   font-style: inherit;
+  transition: 250ms color cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Логотип */
@@ -70,12 +71,21 @@ body {
 }
 
 /* Навігація */
-.header {
+
+.page-header {
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  top: 0;
+
   display: flex;
   flex-basis: 100%;
 
   border-bottom: 1px solid #ececec;
+
+  background-color: var(--primary-bg-color);
 }
+
 .header-container {
   display: flex;
   align-items: center;
@@ -106,6 +116,8 @@ body {
   line-height: 1.14;
   letter-spacing: 0.02em;
   fill: var(--primari-text-color);
+
+  transition: 250ms color cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-tab:hover,
@@ -115,6 +127,22 @@ body {
 .nav-tab.current {
   color: var(--acsent-color);
   fill: var(--acsent-color);
+}
+
+.nav-tab.current {
+  position: relative;
+}
+
+.nav-tab.current::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--acsent-color);
+
+  position: absolute;
+  bottom: -1px;
 }
 
 .auth-nav {
@@ -180,6 +208,10 @@ body {
   letter-spacing: 0.06em;
 
   background-color: var(--acsent-color);
+
+  cursor: pointer;
+    
+  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-button:hover,
@@ -224,6 +256,7 @@ body {
 }
 
 .feature-icon-wrapper {
+  position: relative;
   display: flex;
   height: 120px;
   justify-content: center;
@@ -232,6 +265,23 @@ body {
   background-color: var(--second-bg-color);
 }
 
+.feature-icon-wrapper::before {
+  content: '';
+  position: absolute;
+
+  width: 0%;
+  height: 100%;
+  right: 0;
+  background-color: rgba(33, 149, 243, 0.5);
+  /* opacity: 0; */
+  transition: 250ms width cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-icon-wrapper:hover::before {
+  /* opacity: 1; */
+  width: 100%;
+  left: 0;
+}
 .feature-icon-box {
   width: 70px;
   height: 70px;
@@ -257,8 +307,39 @@ body {
   align-items: center;
 }
 
+.what_we_do-item {
+  position: relative;
+}
+
 .what_we_do-item:not(:first-child) {
   margin-left: 30px;
+}
+
+.what_we_do-item-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  background: rgba(47, 48, 58, 0.8);
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--second-acsent-color);
+
+  opacity: 1;
+  transition: 250ms opacity cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.what_we_do-item-title:hover {
+  opacity: 0;
 }
 
 /* Наша коанда */
@@ -274,14 +355,54 @@ body {
 }
 
 .team-card {
+  position: relative;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 0px 0px 4px 4px;
   background-color: var(--primary-bg-color);
+  perspective: 3000ms;
 }
 
 .team-card:not(:first-child) {
   margin-left: 30px;
+}
+
+.team-flip {
+  width: 270px;
+  height: 260px;
+  transform-style: preserve-3d;
+}
+
+.team-image {
+  position: absolute;
+  transform: rotateY(0deg);
+}
+
+.team-overlay {
+  transform: rotateY(-180deg);
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 24px 64px;
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--second-acsent-color);
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+.team-card .team-image,
+.team-card .team-overlay {
+  transition: 250ms transform cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-card:hover .team-image {
+  transform: rotateY(180deg);
+}
+
+.team-card:hover .team-overlay {
+  transform: rotateY(0deg);
 }
 
 .team-card-content {
@@ -330,12 +451,15 @@ body {
   border-radius: 50%;
 
   fill: var(--linc-fill-color);
+
+  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
+  250ms fill cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-link:hover,
 .social-link:focus {
-  fill: var(--second-acsent-color);
   background-color: var(--acsent-color);
+  fill: var(--second-acsent-color);
 }
 
 .icon-box-social {
@@ -367,6 +491,8 @@ body {
   justify-content: center;
 
   fill: var(--linc-fill-color);
+
+  transition: 250ms border cubic-bezier(0.4, 0, 0.2, 1), 250ms fill cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .client-link:hover,
@@ -427,6 +553,70 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
++
+
+/* Модальне вікно */
+.backdrop {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+
+  transition: 250ms opacity cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.modal {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  width: 528px;
+  height: 581px;
+  transform: translate(-50%, -50%) scale(1);
+
+  background-color: var(--primary-bg-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  opacity: 1;
+
+  transition: 250ms transform cubic-bezier(0.4, 0, 0.2, 1),
+    250ms opacity cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.icon-box-close {
+  width: 11px;
+  height: 11px;
+}
+
 /* ===============  Портфоліо ============= */
 
 /* Фільтр */
@@ -454,6 +644,9 @@ body {
   line-height: 1.62;
 
   background-color: var(--second-bg-color);
+
+  transition: 250ms box-shadow cubic-bezier(0.4, 0, 0.2, 1),
+  250ms color cubic-bezier(0.4, 0, 0.2, 1), 250ms background-color cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter-button:hover,
@@ -489,6 +682,8 @@ body {
   margin-left: 30px;
 
   background-color: var(--primary-bg-color);
+
+  transition: 250ms box-shadow cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card-content {
@@ -511,6 +706,36 @@ body {
   font-size: 18px;
   line-height: 2;
   letter-spacing: 0.06em;
+}
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+
+  transition: 250ms transform cubic-bezier(0.4, 0, 0.2, 1);
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 63px 24px;
+
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--second-acsent-color);
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+.project-item:hover .project-image-overlay,
+.project-item:focus .project-image-overlay {
+  transform: translateY(0);
 }
 
 .project-card-type {
