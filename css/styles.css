@@ -380,18 +380,7 @@ body {
   transform: rotateY(0deg);
 }
 
-.team-overlay {
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 24px 64px;
-  font-size: 18px;
-  line-height: 1.56;
-  color: var(--second-acsent-color);
-  background-color: rgba(33, 150, 243, 0.9);
-}
+
 
 .team-card .team-image,
 .team-card .team-overlay {
